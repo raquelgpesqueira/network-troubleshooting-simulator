@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador MOOC 1 - Error de conexión</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="desktop" class="desktop">
+    <div id="hintBox" class="hint-box">Observa la conexión.</div>
+
+    <div class="desktop-icons">
+      <button id="desktopBin" class="desktop-icon" type="button">
+        <div class="icon-bin"></div>
+        <span>Papelera</span>
+      </button>
+
+      <button id="desktopPortal" class="desktop-icon" type="button">
+        <div class="icon-browser"></div>
+        <span>Portal clínico</span>
+      </button>
+    </div>
+
+    <div id="browserWindow" class="window browser-window">
+      <div class="window-header dark">
+        <div class="window-title">Portal clínico corporativo</div>
+        <div class="window-controls">
+          <button type="button" aria-label="Minimizar">—</button>
+          <button type="button" aria-label="Maximizar">□</button>
+          <button id="closeBrowserBtn" type="button" aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+
+      <div class="browser-toolbar">
+        <div class="browser-dot red"></div>
+        <div class="browser-dot yellow"></div>
+        <div class="browser-dot green"></div>
+        <div class="address-bar">https://portal-clinico.interno</div>
+      </div>
+
+      <div id="browserContent" class="browser-content frozen">
+        <div class="browser-error-card">
+          <div class="error-spinner"></div>
+          <h2>La página no responde correctamente</h2>
+          <p>No se ha podido cargar el portal clínico.</p>
+          <button id="reloadBtn" class="secondary-btn" type="button">Recargar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="networkFlyout" class="flyout hidden">
+      <button id="troubleshootBtn" class="flyout-item" type="button">Solucionar problemas</button>
+      <button id="openSettingsBtn" class="flyout-item" type="button">Abrir configuración de red e Internet</button>
+    </div>
+
+    <div id="networkSettingsWindow" class="window settings-window hidden">
+      <div class="window-header light">
+        <div class="window-title">Configuración · Red e Internet</div>
+        <div class="window-controls">
+          <button type="button" aria-label="Minimizar">—</button>
+          <button type="button" aria-label="Maximizar">□</button>
+          <button id="closeSettingsBtn" type="button" aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+        <aside class="settings-sidebar">
+          <div class="settings-home">Inicio</div>
+          <div class="settings-search">Buscar una configuración</div>
+
+          <div class="sidebar-block-title">Red e Internet</div>
+
+          <nav>
+            <button id="navEstado" class="nav-item active" type="button">Estado</button>
+            <button id="navEthernet" class="nav-item" type="button">Ethernet</button>
+            <button id="navAcceso" class="nav-item" type="button">Acceso telefónico</button>
+            <button id="navVPN" class="nav-item" type="button">VPN</button>
+            <button id="navProxy" class="nav-item" type="button">Proxy</button>
+          </nav>
+        </aside>
+
+        <main class="settings-main">
+          <section id="panelEstado" class="panel-view active">
+            <h1>Estado</h1>
+            <h2>Estado de red</h2>
+
+            <div class="network-status-visual">
+              <div class="pc-monitor">
+                <div class="pc-screen"></div>
+                <div class="pc-stand"></div>
+              </div>
+
+              <div class="status-line"></div>
+
+              <div class="router-box"></div>
+
+              <div id="brokenLine" class="status-line broken"></div>
+
+              <div class="globe-icon"></div>
+            </div>
+
+            <div id="statusText" class="status-text disconnected">
+              No estás conectado a Internet.
+            </div>
+
+            <p class="status-subtext">
+              El equipo no puede acceder al portal clínico porque no hay conectividad disponible.
+            </p>
+
+            <div class="settings-actions">
+              <button id="connectBtn" class="primary-btn" type="button">Conectar</button>
+              <button id="showNetworksBtn" class="secondary-btn" type="button">Mostrar redes disponibles</button>
+            </div>
+
+            <section class="advanced-section">
+              <h3>Configuración de red avanzada</h3>
+              <div class="advanced-item">Cambiar opciones del adaptador</div>
+              <div class="advanced-item">Centro de redes y recursos compartidos</div>
+              <button id="advancedTroubleshootBtn" class="advanced-item advanced-link" type="button">
+                Solucionador de problemas de red
+              </button>
+            </section>
+
+            <div id="nextCaseBox" class="next-case-box hidden">
+              <div class="next-case-text">Caso 1 completado.</div>
+              <button id="nextCaseBtn" class="primary-btn" type="button">Siguiente caso</button>
+            </div>
+          </section>
+
+          <section id="panelEthernet" class="panel-view">
+            <h1>Ethernet</h1>
+            <div class="ethernet-block">
+              <div class="pc-monitor small">
+                <div class="pc-screen"></div>
+                <div class="pc-stand"></div>
+              </div>
+              <div>
+                <div class="ethernet-name">Ethernet</div>
+                <div id="ethernetState" class="ethernet-state disconnected">No conectado</div>
+              </div>
+            </div>
+          </section>
+
+          <section id="panelAcceso" class="panel-view">
+            <h1>Acceso telefónico</h1>
+            <p class="mock-text">Configurar una nueva conexión</p>
+          </section>
+
+          <section id="panelVPN" class="panel-view">
+            <h1>VPN</h1>
+            <div class="vpn-add-row">
+              <div class="vpn-plus">＋</div>
+              <span>Agregar una conexión VPN</span>
+            </div>
+          </section>
+
+          <section id="panelProxy" class="panel-view">
+            <h1>Proxy</h1>
+            <h2>Configuración automática del proxy</h2>
+            <p class="mock-text">Detectar la configuración automáticamente</p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="networksWindow" class="window modal-window hidden">
+      <div class="window-header light">
+        <div class="window-title">Redes disponibles</div>
+        <div class="window-controls">
+          <button id="closeNetworksBtn" type="button" aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="network-list">
+          <div class="network-row">
+            <div>
+              <div class="network-name">HOSPITAL</div>
+              <div class="network-meta">Segura · Corporativa</div>
+            </div>
+            <button class="network-connect-btn" data-network="HOSPITAL" type="button">Conectar</button>
+          </div>
+
+          <div class="network-row">
+            <div>
+              <div class="network-name">CSalud</div>
+              <div class="network-meta">Segura · Centro de salud</div>
+            </div>
+            <button class="network-connect-btn" data-network="CSalud" type="button">Conectar</button>
+          </div>
+
+          <div class="network-row">
+            <div>
+              <div class="network-name">Invitados</div>
+              <div class="network-meta">Acceso restringido</div>
+            </div>
+            <button class="network-connect-btn secondary-btn small" type="button">No disponible</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="troubleshootWindow" class="window modal-window hidden">
+      <div class="window-header light">
+        <div class="window-title">Conexiones a Internet</div>
+        <div class="window-controls">
+          <button id="closeTroubleshootBtn" type="button" aria-label="Cerrar">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div id="troubleshootLoading" class="troubleshoot-loading">
+          <div class="error-spinner large"></div>
+          <div class="troubleshoot-title">Buscando problemas…</div>
+        </div>
+
+        <div id="troubleshootResult" class="troubleshoot-result hidden">
+          <p class="mock-text blue">
+            Seleccione el problema para el cual Windows debe buscar una solución
+          </p>
+
+          <button id="fixInternetBtn" class="troubleshoot-option" type="button">
+            <span class="arrow">→</span>
+            <span>
+              <strong>Solucionar problemas de la conexión a Internet</strong><br />
+              <small>Se intentará restablecer una conexión con el equipo.</small>
+            </span>
+          </button>
+
+          <button class="troubleshoot-option muted" type="button">
+            <span class="arrow">→</span>
+            <span>
+              <strong>Ayudarme a conectarme a una página web específica</strong>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <div class="taskbar">
+      <div class="taskbar-left">
+        <button class="start-btn" type="button" aria-label="Inicio">⊞</button>
+        <div class="search-box-taskbar">Buscar</div>
+      </div>
+
+      <div class="taskbar-center">
+        <div id="taskPortal" class="task-icon active" title="Portal clínico">🌐</div>
+        <div class="task-icon">📁</div>
+        <div class="task-icon">⚙</div>
+      </div>
+
+      <div class="taskbar-right">
+        <button id="networkButton" class="network-button" type="button" title="Sin conexión">
+          <span class="network-symbol">
+            <span class="wifi-arc a1"></span>
+            <span class="wifi-arc a2"></span>
+            <span class="wifi-arc a3"></span>
+            <span class="wifi-dot"></span>
+          </span>
+          <span id="networkCross" class="network-cross">✕</span>
+        </button>
+
+        <div class="clock-block">
+          <div id="clockTime">18:18</div>
+          <div id="clockDate">12/03/2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
