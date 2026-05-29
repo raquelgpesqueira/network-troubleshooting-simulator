@@ -28,5 +28,5 @@ https://raquelgpesqueira.github.io/network-troubleshooting-simulator/
 
 ## Author
 
-Raquel G.Pesqueira
+Raquel G. Pesqueira
 
