@@ -21,6 +21,19 @@ Interactive educational simulator designed for healthcare professionals.
 - JavaScript
 - Vite
 
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
 ## Learning Objectives
 
 This simulator was developed as an educational resource for digital competencies training in healthcare environments. Learners must identify and resolve network connectivity issues using simulated operating system tools and troubleshooting procedures.
