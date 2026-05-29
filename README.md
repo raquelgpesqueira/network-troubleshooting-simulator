@@ -2,6 +2,9 @@
 
 Interactive educational simulator designed for healthcare professionals.
 
+<img width="1269" height="905" alt="image" src="https://github.com/user-attachments/assets/d92eb09d-4214-4662-854e-d339328ad68b" />
+
+
 ## Features
 
 - Simulated Windows desktop
